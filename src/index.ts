@@ -3303,6 +3303,16 @@ export interface Ketch {
   showPreferences(params?: ShowPreferenceOptions): Promise<void>
 
   /**
+   * Show the experience configured for the "Do Not Sell or Share" link.
+   *
+   * Evaluates deployment rules whose trigger is "Do Not Sell or Share Opened" (`onFunction|showDNS`).
+   * Those rules are optional; when the deployment has none, this behaves like showPreferences.
+   *
+   * @param params The parameters for the experience
+   */
+  showDNS(params?: ShowPreferenceOptions): Promise<void>
+
+  /**
    * Signals that an experience has been hidden
    *
    * @param reason is a string representing the reason the experience was closed
