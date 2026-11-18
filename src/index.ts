@@ -1479,7 +1479,7 @@ export interface Right {
    * Purposes this right turns off when submitted. A right is an opt-out right only when this is
    * non-empty; do not infer it from canonicalRightCode.
    */
-  purposeCodes?: string[]
+  optOutPurposeCodes?: string[]
 }
 
 /**

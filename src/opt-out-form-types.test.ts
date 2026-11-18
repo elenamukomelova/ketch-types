@@ -174,7 +174,7 @@ describe('opt-out form types', () => {
         name: 'Opt out',
         description: 'Opt out of targeted advertising',
         canonicalRightCode: 'restrict',
-        purposeCodes: ['targeted_advertising'],
+        optOutPurposeCodes: ['targeted_advertising'],
       },
     ],
     theme,
@@ -183,7 +183,7 @@ describe('opt-out form types', () => {
   }
 
   it('carries the purposes an opt-out right covers', () => {
-    expect(config.rights?.[0].purposeCodes?.[0]).toBe('targeted_advertising')
+    expect(config.rights?.[0].optOutPurposeCodes?.[0]).toBe('targeted_advertising')
   })
 
   it('carries the opt-out progress track arrow icon theme', () => {
