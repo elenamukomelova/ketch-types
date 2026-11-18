@@ -5250,39 +5250,49 @@ export interface AttBannerExperienceLayoutConfig {
  * A missing visible or useDefaultText is treated as true.
  */
 
-export interface UseDefaultTextExperienceLayoutConfig {
+export interface OptOutNoticeTextExperienceLayoutConfig {
   /** False shows the experience content's text in place of the translated default; unset means true */
   useDefaultText?: boolean
 }
 
 export interface OptOutNoticeExperienceLayoutConfig {
   visible?: boolean
-  title?: UseDefaultTextExperienceLayoutConfig
-  description?: UseDefaultTextExperienceLayoutConfig
-  actionButton?: UseDefaultTextExperienceLayoutConfig
+  title?: OptOutNoticeTextExperienceLayoutConfig
+  description?: OptOutNoticeTextExperienceLayoutConfig
+  actionButton?: OptOutNoticeTextExperienceLayoutConfig
+}
+
+export interface ConsentSummaryTextExperienceLayoutConfig {
+  /** False shows the experience content's text in place of the translated default; unset means true */
+  useDefaultText?: boolean
 }
 
 export interface ConsentSummaryExperienceLayoutConfig {
   visible?: boolean
-  title?: UseDefaultTextExperienceLayoutConfig
-  description?: UseDefaultTextExperienceLayoutConfig
-  readOnly?: UseDefaultTextExperienceLayoutConfig
-  allowed?: UseDefaultTextExperienceLayoutConfig
-  optedOut?: UseDefaultTextExperienceLayoutConfig
-  optedOutByGpc?: UseDefaultTextExperienceLayoutConfig
+  title?: ConsentSummaryTextExperienceLayoutConfig
+  description?: ConsentSummaryTextExperienceLayoutConfig
+  readOnly?: ConsentSummaryTextExperienceLayoutConfig
+  allowed?: ConsentSummaryTextExperienceLayoutConfig
+  optedOut?: ConsentSummaryTextExperienceLayoutConfig
+  optedOutByGpc?: ConsentSummaryTextExperienceLayoutConfig
+}
+
+export interface OptOutProgressTextExperienceLayoutConfig {
+  /** False shows the experience content's text in place of the translated default; unset means true */
+  useDefaultText?: boolean
 }
 
 export interface OptOutProgressExperienceLayoutConfig {
-  receivedTitle?: UseDefaultTextExperienceLayoutConfig
-  receivedDescription?: UseDefaultTextExperienceLayoutConfig
-  deviceTitle?: UseDefaultTextExperienceLayoutConfig
-  deviceDescription?: UseDefaultTextExperienceLayoutConfig
-  systemsTitle?: UseDefaultTextExperienceLayoutConfig
-  systemsDescription?: UseDefaultTextExperienceLayoutConfig
-  trackTitle?: UseDefaultTextExperienceLayoutConfig
-  trackDescription?: UseDefaultTextExperienceLayoutConfig
+  receivedTitle?: OptOutProgressTextExperienceLayoutConfig
+  receivedDescription?: OptOutProgressTextExperienceLayoutConfig
+  deviceTitle?: OptOutProgressTextExperienceLayoutConfig
+  deviceDescription?: OptOutProgressTextExperienceLayoutConfig
+  systemsTitle?: OptOutProgressTextExperienceLayoutConfig
+  systemsDescription?: OptOutProgressTextExperienceLayoutConfig
+  trackTitle?: OptOutProgressTextExperienceLayoutConfig
+  trackDescription?: OptOutProgressTextExperienceLayoutConfig
   /** Label of the bordered track button, shown only while the theme's track keeps its actionButton */
-  trackButton?: UseDefaultTextExperienceLayoutConfig
+  trackButton?: OptOutProgressTextExperienceLayoutConfig
 }
 
 /**
