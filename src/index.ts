@@ -1474,6 +1474,12 @@ export interface Right {
   scopedBySubjectType?: boolean
 
   canonicalRightCode: string
+
+  /**
+   * Purposes this right turns off when submitted. A right is an opt-out right only when this is
+   * non-empty; do not infer it from canonicalRightCode.
+   */
+  purposeCodes?: string[]
 }
 
 /**
@@ -4782,6 +4788,7 @@ export interface RightFormThemeConfig {
 export interface ConsentSummaryItemThemeConfig {
   background?: ColorThemeConfig
   text?: TextThemeConfig
+  cornerRadius?: number
 }
 
 export interface ConsentSummaryStatusThemeConfig {
@@ -4799,11 +4806,13 @@ export interface ConsentSummaryThemeConfig {
   item?: ConsentSummaryItemThemeConfig
   optedIn?: ConsentSummaryStatusThemeConfig
   optedOut?: ConsentSummaryStatusThemeConfig
+  optedOutByGpc?: ConsentSummaryStatusThemeConfig
 }
 
 export interface RequestsTabRightFormThemeConfig {
   header?: HeaderThemeConfig
   form?: RightFormThemeConfig
+  gpcBanner?: SignalNoticesThemeConfig
   consentSummary?: ConsentSummaryThemeConfig
   actionButton?: ActionButtonThemeConfig
 }
@@ -4844,16 +4853,34 @@ export interface OptOutProgressStepIconThemeConfig {
   icon?: ColorThemeConfig
 }
 
+export interface StepIconThemeConfig {
+  useDefaultIcon?: boolean
+  icon?: ColorThemeConfig
+  iconUrl?: string
+}
+
+export interface ProgressStepThemeConfig {
+  fill?: ColorThemeConfig
+  outline?: ColorThemeConfig
+  cornerRadius?: number
+  title?: TextThemeConfig
+  description?: TextThemeConfig
+  icon?: StepIconThemeConfig
+}
+
 export interface OptOutProgressTrackThemeConfig {
   background?: ColorThemeConfig
   outline?: ColorThemeConfig
   cornerRadius?: number
   title?: TextThemeConfig
   description?: TextThemeConfig
+  arrowIcon?: ColorThemeConfig
   actionButton?: ActionButtonThemeConfig
 }
 
 export interface OptOutProgressThemeConfig {
+  complete?: ProgressStepThemeConfig
+  pending?: ProgressStepThemeConfig
   divider?: ColorThemeConfig
   stepTitle?: TextThemeConfig
   stepDescription?: TextThemeConfig
@@ -5213,6 +5240,44 @@ export interface AttBannerExperienceLayoutConfig {
 }
 
 /**
+ * Opt-Out Form Experience Layout Configuration
+ *
+ * A missing visible or useDefaultText is treated as true.
+ */
+
+export interface UseDefaultTextLayout {
+  useDefaultText?: boolean
+}
+
+export interface OptOutNoticeExperienceLayoutConfig {
+  visible?: boolean
+  title?: UseDefaultTextLayout
+  description?: UseDefaultTextLayout
+  actionButton?: UseDefaultTextLayout
+}
+
+export interface ConsentSummaryExperienceLayoutConfig {
+  visible?: boolean
+  title?: UseDefaultTextLayout
+  description?: UseDefaultTextLayout
+  readOnly?: UseDefaultTextLayout
+  allowed?: UseDefaultTextLayout
+  optedOut?: UseDefaultTextLayout
+  optedOutByGpc?: UseDefaultTextLayout
+}
+
+export interface OptOutProgressExperienceLayoutConfig {
+  receivedTitle?: UseDefaultTextLayout
+  receivedDescription?: UseDefaultTextLayout
+  deviceTitle?: UseDefaultTextLayout
+  deviceDescription?: UseDefaultTextLayout
+  systemsTitle?: UseDefaultTextLayout
+  systemsDescription?: UseDefaultTextLayout
+  trackTitle?: UseDefaultTextLayout
+  trackDescription?: UseDefaultTextLayout
+}
+
+/**
  * Privacy Protocols Experience Layout Configuration
  */
 
@@ -5324,6 +5389,7 @@ export interface ModalExperienceLayoutConfig {
   description?: TextBlockExperienceLayoutConfig
   gpcBanner?: GpcBannerExperienceLayoutConfig
   attBanner?: AttBannerExperienceLayoutConfig
+  optOutNotice?: OptOutNoticeExperienceLayoutConfig
   purposeListHeader?: ModalListHeaderExperienceLayoutConfig
   purposeList?: ModalPurposeListExperienceLayoutConfig
   footer?: BannerModalFooterExperienceLayoutConfig
@@ -5472,6 +5538,7 @@ export interface PreferencePurposesTabExperienceLayoutConfig {
   header?: PreferenceTabHeaderExperienceLayoutConfig
   gpcBanner?: GpcBannerExperienceLayoutConfig
   attBanner?: AttBannerExperienceLayoutConfig
+  optOutNotice?: OptOutNoticeExperienceLayoutConfig
   purposeListHeader?: PurposesTabListHeaderExperienceLayoutConfig
   purposeList?: PurposesTabListExperienceLayoutConfig
   actionButtonUseDefaultText?: boolean
@@ -5665,6 +5732,9 @@ export enum RecaptchaDisclosureMode {
 export interface RequestsTabRightFormExperienceLayoutConfig {
   enableRecaptcha?: boolean
   recaptchaDisclosureMode?: RecaptchaDisclosureMode
+  gpcBanner?: GpcBannerExperienceLayoutConfig
+  attBanner?: AttBannerExperienceLayoutConfig
+  consentSummary?: ConsentSummaryExperienceLayoutConfig
   actionButton?: RightFormActionButtonExperienceLayoutConfig
 }
 
@@ -5679,6 +5749,7 @@ export interface SubmittedActionButtonExperienceLayoutConfig {
 
 export interface RequestsTabSubmittedExperienceLayoutConfig {
   actionButton: SubmittedActionButtonExperienceLayoutConfig
+  optOutProgress?: OptOutProgressExperienceLayoutConfig
 }
 
 /**
@@ -5807,6 +5878,36 @@ export interface AttBannerExperienceContentConfig {
 }
 
 /**
+ * Opt-Out Form Experience Content Configuration
+ */
+
+export interface OptOutNoticeExperienceContentConfig {
+  title?: string
+  description?: string
+  actionButtonText?: string
+}
+
+export interface ConsentSummaryExperienceContentConfig {
+  title?: string
+  description?: string
+  readOnly?: string
+  allowed?: string
+  optedOut?: string
+  optedOutByGpc?: string
+}
+
+export interface OptOutProgressExperienceContentConfig {
+  receivedTitle?: string
+  receivedDescription?: string
+  deviceTitle?: string
+  deviceDescription?: string
+  systemsTitle?: string
+  systemsDescription?: string
+  trackTitle?: string
+  trackDescription?: string
+}
+
+/**
  * Banner Action Button Experience Content Configuration
  */
 
@@ -5894,6 +5995,7 @@ export interface ModalExperienceContentConfig {
   description?: TextBlockExperienceContentConfig
   gpcBanner?: GpcBannerExperienceContentConfig
   attBanner?: AttBannerExperienceContentConfig
+  optOutNotice?: OptOutNoticeExperienceContentConfig
   purposeListHeader?: ModalListHeaderExperienceContentConfig
   purposeList?: ModalPurposeListExperienceContentConfig
   footer?: FooterExperienceContentConfig
@@ -5993,6 +6095,7 @@ export interface PreferencePurposesTabExperienceContentConfig {
   header?: PreferenceTabHeaderExperienceContentConfig
   gpcBanner?: GpcBannerExperienceContentConfig
   attBanner?: AttBannerExperienceContentConfig
+  optOutNotice?: OptOutNoticeExperienceContentConfig
   purposeListHeader?: PurposesTabListHeaderExperienceContentConfig
   purposeList?: PurposesTabListExperienceContentConfig
   actionButtonText?: string
@@ -6093,6 +6196,9 @@ export interface RequestsTabRightFormExperienceContentConfig {
    * Freely editable and may be cleared entirely.
    */
   recaptchaDisclosureText?: string
+  gpcBanner?: GpcBannerExperienceContentConfig
+  attBanner?: AttBannerExperienceContentConfig
+  consentSummary?: ConsentSummaryExperienceContentConfig
   actionButtonText?: string
 }
 
@@ -6104,6 +6210,7 @@ export interface RequestsTabSubmittedExperienceContentConfig {
   title?: string
   subtitle?: string
   description?: string
+  optOutProgress?: OptOutProgressExperienceContentConfig
   actionButtonText?: string
 }
 
