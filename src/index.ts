@@ -4851,21 +4851,18 @@ export interface OptOutProgressStepIconThemeConfig {
   background?: ColorThemeConfig
   outline?: ColorThemeConfig
   icon?: ColorThemeConfig
-}
-
-export interface StepIconThemeConfig {
+  /** False shows the image at iconUrl in place of the check or ellipsis */
   useDefaultIcon?: boolean
-  icon?: ColorThemeConfig
   iconUrl?: string
 }
 
-export interface ProgressStepThemeConfig {
+export interface OptOutProgressStepThemeConfig {
   fill?: ColorThemeConfig
   outline?: ColorThemeConfig
   cornerRadius?: number
   title?: TextThemeConfig
   description?: TextThemeConfig
-  icon?: StepIconThemeConfig
+  icon?: OptOutProgressStepIconThemeConfig
 }
 
 export interface OptOutProgressTrackThemeConfig {
@@ -4875,16 +4872,24 @@ export interface OptOutProgressTrackThemeConfig {
   title?: TextThemeConfig
   description?: TextThemeConfig
   arrowIcon?: ColorThemeConfig
+  /** The bordered "Track this request" button, kept for themes saved before arrowIcon existed */
   actionButton?: ActionButtonThemeConfig
 }
 
 export interface OptOutProgressThemeConfig {
-  complete?: ProgressStepThemeConfig
-  pending?: ProgressStepThemeConfig
+  /** The received and device steps */
+  complete?: OptOutProgressStepThemeConfig
+  /** The systems step */
+  pending?: OptOutProgressStepThemeConfig
+  /** Fallback for complete.outline and pending.outline in themes saved before those existed */
   divider?: ColorThemeConfig
+  /** Fallback for complete.title and pending.title */
   stepTitle?: TextThemeConfig
+  /** Fallback for complete.description and pending.description */
   stepDescription?: TextThemeConfig
+  /** Fallback for complete.icon */
   completeIcon?: OptOutProgressStepIconThemeConfig
+  /** Fallback for pending.icon */
   pendingIcon?: OptOutProgressStepIconThemeConfig
   track?: OptOutProgressTrackThemeConfig
 }
@@ -5245,36 +5250,39 @@ export interface AttBannerExperienceLayoutConfig {
  * A missing visible or useDefaultText is treated as true.
  */
 
-export interface UseDefaultTextLayout {
+export interface UseDefaultTextExperienceLayoutConfig {
+  /** False shows the experience content's text in place of the translated default; unset means true */
   useDefaultText?: boolean
 }
 
 export interface OptOutNoticeExperienceLayoutConfig {
   visible?: boolean
-  title?: UseDefaultTextLayout
-  description?: UseDefaultTextLayout
-  actionButton?: UseDefaultTextLayout
+  title?: UseDefaultTextExperienceLayoutConfig
+  description?: UseDefaultTextExperienceLayoutConfig
+  actionButton?: UseDefaultTextExperienceLayoutConfig
 }
 
 export interface ConsentSummaryExperienceLayoutConfig {
   visible?: boolean
-  title?: UseDefaultTextLayout
-  description?: UseDefaultTextLayout
-  readOnly?: UseDefaultTextLayout
-  allowed?: UseDefaultTextLayout
-  optedOut?: UseDefaultTextLayout
-  optedOutByGpc?: UseDefaultTextLayout
+  title?: UseDefaultTextExperienceLayoutConfig
+  description?: UseDefaultTextExperienceLayoutConfig
+  readOnly?: UseDefaultTextExperienceLayoutConfig
+  allowed?: UseDefaultTextExperienceLayoutConfig
+  optedOut?: UseDefaultTextExperienceLayoutConfig
+  optedOutByGpc?: UseDefaultTextExperienceLayoutConfig
 }
 
 export interface OptOutProgressExperienceLayoutConfig {
-  receivedTitle?: UseDefaultTextLayout
-  receivedDescription?: UseDefaultTextLayout
-  deviceTitle?: UseDefaultTextLayout
-  deviceDescription?: UseDefaultTextLayout
-  systemsTitle?: UseDefaultTextLayout
-  systemsDescription?: UseDefaultTextLayout
-  trackTitle?: UseDefaultTextLayout
-  trackDescription?: UseDefaultTextLayout
+  receivedTitle?: UseDefaultTextExperienceLayoutConfig
+  receivedDescription?: UseDefaultTextExperienceLayoutConfig
+  deviceTitle?: UseDefaultTextExperienceLayoutConfig
+  deviceDescription?: UseDefaultTextExperienceLayoutConfig
+  systemsTitle?: UseDefaultTextExperienceLayoutConfig
+  systemsDescription?: UseDefaultTextExperienceLayoutConfig
+  trackTitle?: UseDefaultTextExperienceLayoutConfig
+  trackDescription?: UseDefaultTextExperienceLayoutConfig
+  /** Label of the bordered track button, shown only while the theme's track keeps its actionButton */
+  trackButton?: UseDefaultTextExperienceLayoutConfig
 }
 
 /**
@@ -5905,6 +5913,7 @@ export interface OptOutProgressExperienceContentConfig {
   systemsDescription?: string
   trackTitle?: string
   trackDescription?: string
+  trackButtonText?: string
 }
 
 /**
