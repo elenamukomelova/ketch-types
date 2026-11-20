@@ -280,7 +280,7 @@ describe('index', () => {
               },
               submitted: {
                 actionButton: { visible: true, useDefaultText: true },
-                optOutProgress: { receivedTitle: { useDefaultText: false }, trackButton: { useDefaultText: true } },
+                optOutProgress: { receivedTitle: { useDefaultText: false } },
               },
             },
           },
@@ -297,7 +297,7 @@ describe('index', () => {
                 attBanner: { openSettingsLink: 'Settings' },
                 consentSummary: { readOnly: 'Read-only', optedOutByGpc: 'Opted Out by GPC' },
               },
-              submitted: { optOutProgress: { trackDescription: 'Track this request.', trackButtonText: 'Track' } },
+              submitted: { optOutProgress: { trackDescription: 'Track this request.' } },
             },
           },
         },
@@ -310,7 +310,9 @@ describe('index', () => {
 
       expect(layout.modal?.optOutNotice?.visible).toBe(false)
       expect(layout.preference?.tabs?.requests?.rightForm?.consentSummary?.optedOutByGpc?.useDefaultText).toBe(false)
-      expect(content.preference?.tabs?.requests?.submitted?.optOutProgress?.trackButtonText).toBe('Track')
+      expect(content.preference?.tabs?.requests?.submitted?.optOutProgress?.trackDescription).toBe(
+        'Track this request.',
+      )
       expect(progressVisibility.preference).toBeDefined()
     })
   })

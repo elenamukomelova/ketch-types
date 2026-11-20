@@ -4872,7 +4872,6 @@ export interface OptOutProgressTrackThemeConfig {
   title?: TextThemeConfig
   description?: TextThemeConfig
   arrowIcon?: ColorThemeConfig
-  /** The bordered "Track this request" button, kept for themes saved before arrowIcon existed */
   actionButton?: ActionButtonThemeConfig
 }
 
@@ -5291,8 +5290,6 @@ export interface OptOutProgressExperienceLayoutConfig {
   systemsDescription?: OptOutProgressTextExperienceLayoutConfig
   trackTitle?: OptOutProgressTextExperienceLayoutConfig
   trackDescription?: OptOutProgressTextExperienceLayoutConfig
-  /** Label of the bordered track button, shown only while the theme's track keeps its actionButton */
-  trackButton?: OptOutProgressTextExperienceLayoutConfig
 }
 
 /**
@@ -5923,7 +5920,6 @@ export interface OptOutProgressExperienceContentConfig {
   systemsDescription?: string
   trackTitle?: string
   trackDescription?: string
-  trackButtonText?: string
 }
 
 /**
